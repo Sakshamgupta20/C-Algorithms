@@ -53,6 +53,14 @@ void display(struct node *head)
 	}
 }
 
+void delete_link(struct node *before_delete)
+{
+	printf("Deleting Element after %d \n",before_delete->data);
+	struct node *temp;
+	temp=before_delete->next;
+	before_delete->next=temp->next;	
+}
+
 int main()
 {
 	int n;
@@ -80,9 +88,11 @@ int main()
 		
 	}
 	
-	head=front(head,10);
-	end(head,20);
-	after(head->next->next,30);
-	
+	//head=front(head,10);
+	//end(head,20);
+	//after(head->next->next,30);
+
+	delete_link(head->next->next);
 	display(head);
+	
 }
