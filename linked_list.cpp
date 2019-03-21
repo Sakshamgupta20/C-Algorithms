@@ -44,7 +44,7 @@ void after(struct node *a, int data)
 
 void display(struct node *head)
 {
-	printf("Elements in Linked List Are:- \n");
+	printf("\nElements in Linked List Are:- \n");
 		while(head!=NULL)
 	{
 		printf("%d ",head->data);
@@ -59,6 +59,20 @@ void delete_link(struct node *before_delete)
 	struct node *temp;
 	temp=before_delete->next;
 	before_delete->next=temp->next;	
+}
+
+struct node *reverse(struct node *head)
+{
+	struct node *next,*prev=NULL;
+	struct node *current=head;
+	while(current !=NULL)
+	{
+		next=current->next;
+		current->next=prev;
+		prev=current;
+		current=next;
+	}
+	return(prev);
 }
 
 int main()
@@ -92,7 +106,10 @@ int main()
 	//end(head,20);
 	//after(head->next->next,30);
 
-	delete_link(head->next->next);
+	//delete_link(head->next->next);
 	display(head);
+	head=reverse(head);
+	display(head);
+	
 	
 }
