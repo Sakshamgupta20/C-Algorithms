@@ -118,7 +118,39 @@ struct node *reverse_upto_knode(struct node *head,int k)
 	return(prev);
 }
 
+void middle_element(struct node *head)
+{	
+	struct node *tortoise=head;
+	struct node *hare=head;
+	if(head!=NULL)
+	{
+		while(hare!=NULL && hare->next!=NULL)
+		{
+			hare=hare->next->next;
+			tortoise=tortoise->next;
+		}
+		printf("\nThe Middle element is %d \n",tortoise->data);
+	}
+}
 
+void cycle_detect(struct node *head)
+{	
+	struct node *tortoise=head;
+	struct node *hare=head;
+	if(head!=NULL)
+	{
+		while(hare!=NULL && tortoise!=NULL && hare->next!=NULL)
+		{
+			hare=hare->next->next;
+			tortoise=tortoise->next;
+			if(tortoise==hare)
+			{
+				printf("\nLoop Found\n");
+				break;
+			}
+		}
+	}
+}
 
 
 int main()
@@ -165,5 +197,9 @@ int main()
 	//head=reverse_upto_knode(head,k);
 	//display(head);
 
-	
+	display(head);
+	middle_element(head);
+
+	head->next->next->next->next=head;  //If elements are 5 then loop will be formed
+	cycle_detect(head);
 }
