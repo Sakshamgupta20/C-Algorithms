@@ -75,6 +75,52 @@ struct node *reverse(struct node *head)
 	return(prev);
 }
 
+struct node *reverse_every_knode(struct node *head,int k)
+{	
+	struct node *next,*prev=NULL;
+	struct node *current=head;
+	int count=0;
+	while(current !=NULL && count<k )
+	{
+		next=current->next;
+		current->next=prev;
+		prev=current;
+		current=next;
+		count++;
+	}
+	
+	if(next!=NULL)
+	{
+		head->next=reverse_every_knode(next,k);
+	}
+	return(prev);
+}
+
+struct node *reverse_upto_knode(struct node *head,int k)
+{	
+	struct node *next,*prev=NULL;
+	struct node *current=head;
+	int count=0;
+	while(current !=NULL && count<k )
+	{
+		next=current->next;
+		current->next=prev;
+		prev=current;
+		current=next;
+		count++;
+	}
+	
+	if(next!=NULL)
+	{
+		head->next=next;
+	}
+	
+	return(prev);
+}
+
+
+
+
 int main()
 {
 	int n;
@@ -107,9 +153,17 @@ int main()
 	//after(head->next->next,30);
 
 	//delete_link(head->next->next);
-	display(head);
-	head=reverse(head);
-	display(head);
+	//head=reverse(head);
+	//int k;
+	//printf("\nEnter upto which group you want to reverse \n");
+	//scanf("%d",&k);
+	//head=reverse_every_knode(head,k);
 	
+	//int k;
+	//printf("\nEnter upto which node you want to reverse \n");
+	//scanf("%d",&k);
+	//head=reverse_upto_knode(head,k);
+	//display(head);
+
 	
 }
