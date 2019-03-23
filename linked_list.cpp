@@ -137,6 +137,7 @@ void cycle_detect(struct node *head)
 {	
 	struct node *tortoise=head;
 	struct node *hare=head;
+	int flag=0;
 	if(head!=NULL)
 	{
 		while(hare!=NULL && tortoise!=NULL && hare->next!=NULL)
@@ -146,12 +147,70 @@ void cycle_detect(struct node *head)
 			if(tortoise==hare)
 			{
 				printf("\nLoop Found\n");
+				flag=1;
 				break;
 			}
+		}
+		if(flag!=1)
+		{
+			printf("\nNo Loop Found\n");
 		}
 	}
 }
 
+void print_nth_last_element(struct node *head,int n)
+{	
+	struct node *tortoise=head;
+	struct node *hare=head;
+	int tn=0;
+	int count=0;
+	if(head!=NULL)
+	{
+		while(hare!=NULL )
+		{
+			if(hare->next==NULL)
+			{
+				tn=tn+1;
+				break;
+			}
+			hare=hare->next->next;
+			tortoise=tortoise->next;
+			tn=tn+2;
+		}
+	}
+	n=tn-n;
+	while(count<n)
+	{
+		count=count+1;
+		head=head->next;
+	}
+	printf("\n%d Last Element is %d \n",tn-n,head->data);
+}
+
+void first_node_detect(struct node *head)
+{	
+	struct node *tortoise=head;
+	struct node *hare=head;
+	int flag=0;
+	if(head!=NULL)
+	{
+		while(hare!=NULL && tortoise!=NULL && hare->next!=NULL)
+		{
+			hare=hare->next->next;
+			tortoise=tortoise->next;
+			if(tortoise==hare)
+			{
+				printf("\nLoop Found 1st Element is %d\n",tortoise->data);
+				flag=1;
+				break;
+			}
+		}
+		if(flag!=1)
+		{
+			printf("\nNo Loop Found\n");
+		}
+	}
+}
 
 int main()
 {
@@ -177,7 +236,6 @@ int main()
 			
 		}
 		prev=p;
-		
 	}
 	
 	//head=front(head,10);
@@ -186,20 +244,32 @@ int main()
 
 	//delete_link(head->next->next);
 	//head=reverse(head);
-	//int k;
-	//printf("\nEnter upto which group you want to reverse \n");
-	//scanf("%d",&k);
-	//head=reverse_every_knode(head,k);
 	
-	//int k;
-	//printf("\nEnter upto which node you want to reverse \n");
-	//scanf("%d",&k);
-	//head=reverse_upto_knode(head,k);
+	/*int k;
+	printf("\nEnter upto which group you want to reverse \n");
+	scanf("%d",&k);
+	head=reverse_every_knode(head,k);*/
+	
+	/*int k;
+	printf("\nEnter upto which node you want to reverse \n");
+	scanf("%d",&k);
+	head=reverse_upto_knode(head,k);
+	display(head);*/
+
 	//display(head);
+	//middle_element(head);
 
+	/*head->next->next->next->next=head;  //If elements are 5 then loop will be formed
+	cycle_detect(head);*/
+	
+	/*int fn=0;
+	printf("\nEnter nth Last Element You want to find \n");
+	scanf("%d",&fn);
+	print_nth_last_element(head,fn); */
+	
+	
 	display(head);
-	middle_element(head);
-
-	head->next->next->next->next=head;  //If elements are 5 then loop will be formed
-	cycle_detect(head);
+	head->next->next->next->next=head;
+	first_node_detect(head);
+	
 }
