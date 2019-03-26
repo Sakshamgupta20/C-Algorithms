@@ -44,6 +44,21 @@ struct node *insert(struct node *node,int data)
 	}
 	return(node);
 }
+struct node* search(struct node *node,int data)
+{
+	if (node->data == data) 
+	{
+	printf("Data Found");
+	}
+	if(data<node->data)
+	{
+		return(search(node->left,data));
+	}
+	else if(data>node->data)
+	{
+		return(search(node->right,data));
+	}
+}
 int main()
 {
 	struct node *root=NULL;
@@ -55,4 +70,6 @@ int main()
     insert(root,60); 
     insert(root,80);	
     inorder(root);
+    
+    search(root,20);
 }
